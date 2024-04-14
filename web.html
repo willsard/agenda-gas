@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--SCRIPLET QUE VIENE DE funciones.js para traer los otros html-->
+    <?!= obtenerDatosHtml('css'); ?>
+   
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <!--HEADER-->
+    <?!= obtenerDatosHtml('header'); ?>
+
+    <!--MAIN-->
+    <?!= obtenerDatosHtml('main'); ?>
+
+    <!--FOOTER-->
+    <?!= obtenerDatosHtml('footer'); ?>
+
+    
+
+    <!--JS-->
+    <?!= obtenerDatosHtml('js'); ?>
+</body>
+</html> 
