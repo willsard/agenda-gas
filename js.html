@@ -1,68 +1,83 @@
 <script>
 
     //FUNCION DE TRAER LSO DATOS DE LA HOJA DE CALCULO Y LLENAT UNA TABLA EN EL MAIN
-    function crearTablaContactos() {
+    function crearTablaContactos() 
+    {
+        //crear tabla y el cuerpo de la tabla a partir de un id
+        let tabla = document.getElementById('tablaContactos');
+        //limpiamos la tabla antes de llenarla nuevamente
+        //si existe la tabla se borra
+        if (tabla) 
+        {
+            tabla.remove();
+        }
         //llamado a la función de Google Apps Script para obtener los contactos del var tabla = document.createElement("table");
-        google.script.run.withSuccessHandler(
-            //funcion para rellenar  la tabla con los contactos que viene de la funion obtenerContactos()
-            function (obj) {
-
-                //crear tabla y el cuerpo de la tabla a partir de un id
-
-                let tabla = document.getElementById('tablaContactos');
-                //limpiamos la tabla antes de llenarla nuevamente
-                //si existe la tabla se borra
-                if (tabla) {
-                    tabla.remove();
-                }
-
-                // a partir de aca se crea la tabla
-                tabla = document.createElement("table");
-                tabla.id = 'tablaContactos';
-
-
-                let tablaHeader = document.createElement('thead');
-                let tablaBody = document.createElement('tbody');
-
-                // crear las filas y las columnas  segun la cantidad de contactos obtenidos 2 foreach
-                Array.from(obj).forEach((filaActual, i) => {//le agrego un indice  a cada elemento del array para poder manipularlo y crear una condicion para capturar los encabezados
-
-                    let fila = document.createElement('tr');
-                    filaActual.forEach(celdaActual => {
-
-                        let celda = document.createElement('td');
-                        celda.textContent = celdaActual;
-                        fila.appendChild(celda);
-
-                    });
-
-                    if (i == 0) {
-
-                        tablaHeader.appendChild(fila);//agregamos la primera fila a la cabecera
-                        tabla.appendChild(tablaHeader);//agregamos la cabecera a la tabla
-                    } else {
-                        tablaBody.appendChild(fila);
-                    }
-
-
-
-                });
-
-                // agregamos clases a la cabecera de la tabla
-                tablaHeader.classList.add('table-dark');
-                /*****agregamos el cuerpo a la tabla ********/
-                tabla.appendChild(tablaBody);
-
-
-                //agregamos clase de bootstrap a la tabla
-                tabla.classList.add('table', 'table-striped', 'border', 'border-3', 'tabla-success');//clase css a la tabla
-
-                //agregamos tabla a la pagina
-                document.getElementById('divContactos').appendChild(tabla); // lo agregamos al div donde se muestra la tabla en el main
-
-            }
-        ).obtenerContactos();
+        google.script.run
+        .withSuccessHandler(crearTablaContactosCorrectamente)
+        .withFailureHandler(crearTablaContactosError)
+        .obtenerContactos();
         // Creamos la tabla con 3 
     }
+
+
+     //funcion para rellenar  la tabla con los contactos que viene de la funion obtenerContactos()
+    function crearTablaContactosCorrectamente(obj) {
+
+        // a partir de aca se crea la tabla
+        tabla = document.createElement("table");
+        tabla.id = 'tablaContactos';
+
+        let tablaHeader = document.createElement('thead');
+        let tablaBody = document.createElement('tbody');
+
+        // crear las filas y las columnas  segun la cantidad de contactos obtenidos 2 foreach
+        Array.from(obj).forEach((filaActual, i) => 
+        {//le agrego un indice  a cada elemento del array para poder manipularlo y crear una condicion para capturar los encabezados
+
+            let fila = document.createElement('tr');
+            filaActual.forEach(celdaActual => 
+            {
+
+                let celda = document.createElement('td');
+                celda.textContent = celdaActual;
+                fila.appendChild(celda);
+
+            });
+
+            if (i == 0) 
+            {
+                tablaHeader.appendChild(fila);//agregamos la primera fila a la cabecera
+                tabla.appendChild(tablaHeader);//agregamos la cabecera a la tabla
+            }else 
+            {
+                tablaBody.appendChild(fila);
+            }
+
+            // mostrar notificacio exito
+
+        });
+
+        // agregamos clases a la cabecera de la tabla
+        tablaHeader.classList.add('table-dark');
+        /*****agregamos el cuerpo a la tabla ********/
+        tabla.appendChild(tablaBody);
+        //agregamos clase de bootstrap a la tabla
+        tabla.classList.add('table', 'table-striped', 'border', 'border-3', 'tabla-success');//clase css a la tabla
+        //agregamos tabla a la pagina
+        document.getElementById('divContactos').appendChild(tabla); // lo agregamos al div donde se muestra la tabla en el main
+
+        }
+
+
+        function crearTablaContactosError()
+        {
+            //mostrar notificacion error
+        }
+
+        
+        function crearNotificacion(tipo,mensaje, titulo) 
+        {
+            
+        }
 
 </script>
