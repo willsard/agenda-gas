@@ -53,7 +53,8 @@
                 tablaBody.appendChild(fila);
             }
 
-            // mostrar notificacio exito
+            // mostrar notificacion exito
+            crearNotificacion(1,' creada tabla de forma exitosa','felicitaciones');
 
         });
 
@@ -75,9 +76,29 @@
         }
 
         
-        function crearNotificacion(tipo,mensaje, titulo) 
+        function crearNotificacion(tipo,mensaje,titulo) 
         {
-            
+            //trae la informacion que se encuentre en el div del toast del texto de la notificacion
+            let mensajeNotificacion = document.getElementById('mensajeNotificacion');
+            //trae la informacion que se encuentre en el strong del toast del titulo de la notificacion
+            let tituloNotificacion = document.getElementById('tituloNotificacion');
+            //asignamos el mensaje y el titulo a los divs
+            let elementNotificacion = document.getElementById('notificacion');
+             //trae la informacion que se encuentre en el div del toast del icono de la notificacion
+            let iconoNotificacion = document.getElementById('iconoNotificacion');
+            //crea instancia del toast asigando todo el div de la notificacion
+            let notificacion = bootstrap.Toast.getOrCreateInstance(elementNotificacion);
+
+            // editar la notificacion
+            iconoNotificacion.className ='';//limpia las clases del icono del toast
+            iconoNotificacion.classList.add('bi','bi-check2-square')//asigna las clases del icono del toast ()en este caso es el icono del check
+            mensajeNotificacion.textContent = mensaje;// asigno el mensaje que viene de la variable del metodo
+            tituloNotificacion.innerText = titulo;// asigno el titulo que viene de la variable del metodo
+            elementNotificacion.classList.add('text-bg-primary');
+            //elementNotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('red');//color personalizado desde el css
+
+            // mostrar la notificacion
+            notificacion.show();
         }
 
 </script>
