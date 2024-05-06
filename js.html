@@ -11,7 +11,13 @@
         {
             tabla.remove();
         }
-        //llamado a la función de Google Apps Script para obtener los contactos del var tabla = document.createElement("table");
+       
+
+
+        // crear icono de carga
+        crearLoader('divContactos');
+
+
         google.script.run
         .withSuccessHandler(crearTablaContactosCorrectamente)
         .withFailureHandler(crearTablaContactosError)
@@ -22,7 +28,7 @@
 
      //funcion para rellenar  la tabla con los contactos que viene de la funion obtenerContactos()
     function crearTablaContactosCorrectamente(obj) {
-
+         //llamado a la función de Google Apps Script para obtener los contactos del var tabla = document.createElement("table");
         // a partir de aca se crea la tabla
         tabla = document.createElement("table");
         tabla.id = 'tablaContactos';
@@ -55,6 +61,9 @@
 
             // mostrar notificacion exito
             crearNotificacion(1,' creada tabla de forma exitosa','felicitaciones');
+
+            //elimina el boton de loader
+            elimininarLoader();
 
         });
 
@@ -99,6 +108,37 @@
 
             // mostrar la notificacion
             notificacion.show();
+        }
+
+        function crearLoader(elementoPadre)
+        {
+
+            /**
+             * simulando lo q dice la pagina de como se debe insertar esete boton de loader
+             * <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+            */
+            elimininarLoader();
+            let loader = document.createElement('div');
+            loader.id = 'loader';
+            loader.appendChild(document.createElement('div'));
+            loader.appendChild(document.createElement('div'));
+            loader.appendChild(document.createElement('div'));
+            loader.appendChild(document.createElement('div'));
+            loader.classList.add('lds-ellipsis');
+            document.getElementById(elementoPadre).appendChild(loader);//cargar el boton en donde se requiera de forma dinamica
+
+        }
+
+        function elimininarLoader()
+        {
+            
+            //elimina el loader
+            let loader = document.getElementById('loader');
+            if(loader)
+            {
+                loader.remove();
+            }
+
         }
 
 </script>
