@@ -20,10 +20,14 @@
     function insertarContacto() 
     {
      
-       //obtener los datos desde id de los campos del formulario html
-       let nombre = document.getElementById('nombre').value;
-       let telefono = document.getElementById('telefono').value;
-       let correo = document.getElementById('correo').value;
+        //obtener los datos desde id de los campos del formulario html
+        let nombre = document.getElementById('nombre').value;
+        let telefono = document.getElementById('telefono').value;
+        let correo = document.getElementById('correo').value;
+
+        //llamar el modal y cerrarlo
+        let myModalEl = document.getElementById('crearContactoModal')
+        bootstrap.Modal.getInstance(myModalEl).hide();
        
         // crear icono de carga
         crearLoader('divContactos');
@@ -77,6 +81,7 @@
 
         // crear las filas y las columnas  segun la cantidad de contactos obtenidos 2 foreach
         Array.from(obj).forEach((filaActual, i) => 
+
         {//le agrego un indice  a cada elemento del array para poder manipularlo y crear una condicion para capturar los encabezados
 
             let fila = document.createElement('tr');
