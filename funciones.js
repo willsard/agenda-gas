@@ -1,7 +1,23 @@
 
-function doGet() {
-    
+const HOJA = SpreadsheetApp.openById('1zymso9uMkp4flWkJOo2m6-4pU5EDkt2Cj-9ETksNgSs').getActiveSheet();
+
+/** funcion que trae los datos del GET del formulario de creacion de contacto  */
+function doGet(datos) {
+    /** se debe convertir los datos a un objeto, se traen con parameter y el nombre del campo del formulario*/
+    insertarContacto(datos.parameter.nombre, datos.parameter.telefono, datos.parameter.correo );
+    /**  se debe retornar de nuevo la plantilla html */
     return HtmlService.createTemplateFromFile('web').evaluate().setTitle("agenda de GAS"); 
+}
+
+
+/** funcion que trae los datos del POST del formulario de creacion de contacto  */
+function doPost(datos)
+{
+    /** se debe convertir los datos a un objeto, se traen con parameter y el nombre del campo del formulario*/
+    insertarContacto(datos.parameter.nombre, datos.parameter.telefono, datos.parameter.correo );
+
+    /**  se debe retornar de nuevo la plantilla html */
+      return HtmlService.createTemplateFromFile('web').evaluate().setTitle("agenda de GAS"); 
 }
 
 
@@ -17,9 +33,16 @@ function obtenerDatosHtml(nombre) {
  */
 function obtenerContactos(){
 
-    let hoja = SpreadsheetApp.openById('1zymso9uMkp4flWkJOo2m6-4pU5EDkt2Cj-9ETksNgSs').getActiveSheet();
-    let datos = hoja.getDataRange().getValues();
+   
+    return HOJA.getDataRange().getValues();
 
-    return datos;
+}
 
+/**
+ * funcion que inserta un nuevo contacto*/
+
+function insertarContacto(nombre, telefono, correo) {
+
+    HOJA.appendRow([nombre, telefono, correo]);
+    
 }

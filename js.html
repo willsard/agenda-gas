@@ -3,26 +3,65 @@
     //FUNCION DE TRAER LSO DATOS DE LA HOJA DE CALCULO Y LLENAT UNA TABLA EN EL MAIN
     function crearTablaContactos() 
     {
-        //crear tabla y el cuerpo de la tabla a partir de un id
-        let tabla = document.getElementById('tablaContactos');
-        //limpiamos la tabla antes de llenarla nuevamente
-        //si existe la tabla se borra
-        if (tabla) 
-        {
-            tabla.remove();
-        }
+      
+        eliminarTablaContactos();
        
-
-
         // crear icono de carga
         crearLoader('divContactos');
-
 
         google.script.run
         .withSuccessHandler(crearTablaContactosCorrectamente)
         .withFailureHandler(crearTablaContactosError)
         .obtenerContactos();
         // Creamos la tabla con 3 
+    }
+
+    //funcion para insertar contactos que se crean a traves del formulario de ingreso de contactos
+    function insertarContacto() 
+    {
+     
+       //obtener los datos desde id de los campos del formulario html
+       let nombre = document.getElementById('nombre').value;
+       let telefono = document.getElementById('telefono').value;
+       let correo = document.getElementById('correo').value;
+       
+        // crear icono de carga
+        crearLoader('divContactos');
+
+
+        google.script.run
+        .withSuccessHandler(contactoInsertadoCorrectamente)
+        .withFailureHandler(InsertarContactoError)
+        .insertarContacto(nombre,telefono,correo)
+        // Creamos la tabla con 3 
+    }
+
+    /*funcion que borra los campos del html cuando guarda la informacion correctamente*/
+    function contactoInsertadoCorrectamente()
+    {
+       document.getElementById('nombre').value = '';
+       document.getElementById('telefono').value = '';
+       document.getElementById('correo').value = '';
+
+       //mostrar notificacion
+        crearNotificacion(1,'Contacto insertado correctamente', 'Contacto OK');
+       //elimina el boton de loader
+        elimininarLoader();
+
+        //muestra la tabla de contactos
+        crearTablaContactos()
+
+       
+    }
+
+    function InsertarContactoError()
+    {
+        crearNotificacion(2,'no se ha podido guardar el contacto', 'error en el cargue');
+        //elimina el boton de loader
+        elimininarLoader();
+
+          //muestra la tabla de contactos
+          crearTablaContactos()
     }
 
 
@@ -139,6 +178,18 @@
                 loader.remove();
             }
 
+        }
+
+        function eliminarTablaContactos() 
+        {
+           //crear tabla y el cuerpo de la tabla a partir de un id
+                let tabla = document.getElementById('tablaContactos');
+                //limpiamos la tabla antes de llenarla nuevamente
+                //si existe la tabla se borra
+                if (tabla) 
+                {
+                    tabla.remove();
+                }   
         }
 
 </script>
