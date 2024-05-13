@@ -1,28 +1,21 @@
 <main>
-
-
-
     <div class="d-flex justify-content-center my-3">
-        <button type="button" class="btn btn-success m-3" onclick="crearTablaContactos()">Mostrar Usuarios</button>
+        <button type="button" class="btn btn-success m-3" onclick="crearTablaContactos()">
+            Mostrar Usuarios
+        </button>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#crearContactoModal">
             Crear Contacto
         </button>
-
-
     </div>
 
     <!--Tabla de contactos-->
     <div class="container col-12 col-lg-6 mb-4 d-flex justify-content-center" id="divContactos">
-
-
-
         <!--notificaciones-->
-
 
         <div class="toast-container position-fixed bottom-0 end-0 p-3">
             <!--notificacion Toast-->
-            <div id="notificacion" class="toast align-items-center  border-0" role="alert" aria-live="assertive"
+            <div id="notificacion" class="toast align-items-center border-0" role="alert" aria-live="assertive"
                 aria-atomic="true">
                 <!--cabecera de la notificacion-->
                 <div class="toast-header p-0">
@@ -31,15 +24,10 @@
                     <button type="button" class="btn-close m-2" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
                 <!--cuerpo de la notoficacion-->
-                <div class="toast-body" id="mensajeNotificacion">
-
-                </div>
+                <div class="toast-body" id="mensajeNotificacion"></div>
             </div>
         </div>
-
     </div>
-
-
 
     <!-- Modal -->
     <div class="modal fade" id="crearContactoModal" tabindex="-1" aria-labelledby="crearContactoModal"
@@ -47,39 +35,47 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="tituloCrearContactoModal">Crear Contacto</h1>
+                    <h1 class="modal-title fs-5" id="tituloCrearContactoModal">
+                        Crear Contacto
+                    </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form onsubmit="insertarContacto()" method="dialog" id="formulario"><!--se coloca el form antes del cuerpo de modal-->
+                <form onsubmit="insertarContacto()" method="dialog" id="formulario">
+                    <!--se coloca el form antes del cuerpo de modal-->
                     <!--se debe crear esta funcion en el js y q llame la funcion del funciones.gs -->
                     <div class="modal-body">
-
                         <!-- ========== formulario de ingreso de contactos ========== 
                          <form action="https://script.google.com/macros/s/AKfycbwPW_lAGDoqQowSdmtb0pK2_F6P-CG9wLYRSkMtdfE/dev" method="post" id="formulario"> para metodos get o post-->
 
                         <!--campos del formulario-->
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Introduce el nombre del contacto</label>
-                            <input type="text" class="form-control" name="nombre" id="nombre" required>
+                            <input type="text" class="form-control" name="nombre" id="nombre" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellido" class="form-label">Introduce el apellido del contacto</label>
+                            <input type="text" class="form-control" name="apellido" id="apellido" required />
                         </div>
                         <div class="mb-3">
                             <label for="telefono" class="form-label">Introduce el teléfono del contacto</label>
-                            <input type="number" class="form-control" name="telefono" id="telefono" required>
+                            <input type="number" class="form-control" name="telefono" id="telefono" required />
                         </div>
                         <div class="mb-3">
                             <label for="correo" class="form-label">Introduce el correo del contacto</label>
-                            <input type="email" class="form-control" name="correo" id="correo" required>
+                            <input type="email" class="form-control" name="correo" id="correo" required />
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <!--Botones-->
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn  btn-success">Crear Contacto</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cerrar
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            Crear Contacto
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
 </main>

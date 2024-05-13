@@ -41,8 +41,8 @@ function obtenerContactos(){
 /**
  * funcion que inserta un nuevo contacto*/
 
-function insertarContacto(nombre, telefono, correo) {
+function insertarContacto(nombre, apellido, telefono, correo) {
 
-    HOJA.appendRow([nombre, telefono, correo]);
+    HOJA.appendRow([nombre, apellido, telefono, correo]);
     
 }
